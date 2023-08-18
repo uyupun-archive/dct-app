@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Top, Think } from "./pages";
+import { Top, Think, Answer, Complete } from "./pages";
 
 export const router = createBrowserRouter([
   {
@@ -9,5 +9,13 @@ export const router = createBrowserRouter([
   {
     path: "/think",
     element: <Think />,
+  },
+  {
+    path: "/answer",
+    element: <Answer />,
+  },
+  {
+    path: "/complete",
+    element: <Complete />,
   },
 ]);
