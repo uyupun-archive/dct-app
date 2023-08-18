@@ -1,0 +1,16 @@
+@import "./variables.scss";
+@import "./mixin.scss";
+
+html {
+  background-color: $color-skyblue;
+}
+
+body {
+  color: $color-black;
+  padding: 0 20px;
+
+  @include pc() {
+    max-width: 768px;
+    margin: auto;
+  }
+}
