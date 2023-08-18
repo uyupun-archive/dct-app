@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../../components/Button";
 import styles from "./styles.module.scss";
+import { LinkButton } from "../../components/LinkButton";
 
 const Think: React.FC = () => {
   return (
@@ -15,7 +16,7 @@ const Think: React.FC = () => {
           問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い
         </p>
       </div>
-      <div>
+      <div className={styles["button-area"]}>
         <Button
           type="button"
           onClick={() => {
@@ -24,7 +25,7 @@ const Think: React.FC = () => {
         >
           カンニングする！
         </Button>
-        <Button>答え出た！</Button>
+        <LinkButton href="/answer">考えをまとめる！</LinkButton>
       </div>
     </div>
   );
