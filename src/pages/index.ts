@@ -1,2 +1,2 @@
-export { Top } from "./top";
-export { Think } from "./think";
+export { Top } from "./Top";
+export { Think } from "./Think";
