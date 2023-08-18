@@ -1,7 +1,21 @@
 @import "../../styles/variables.scss";
 
+.font-bold {
+  font-weight: bold;
+}
+
+.container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  text-align: center;
+  padding: 40px 0;
+}
+
+
 .button-area {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding:10px 0;
 }
