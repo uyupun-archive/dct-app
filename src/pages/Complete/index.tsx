@@ -10,7 +10,7 @@ const Complete: React.FC = () => {
         <Button type="button" onClick={() => {}}>
           トップへ戻る！
           </Button>
-          </div>
+        </div>
     </div>
   );
 };
