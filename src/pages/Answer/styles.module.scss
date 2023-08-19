@@ -1,0 +1,48 @@
+@import "../../styles/variables.scss";
+
+.container {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.heading {
+  font-size: 3rem;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.steps {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  & span {
+    font-size: 1.5rem;
+  }
+}
+
+.text-area {
+  width: 100%;
+
+}
+
+.question {
+  font-size: 1rem;
+  text-align: left;
+  word-break: break-all;
+  margin-bottom: 20px;
+}
+
+.answer {
+  font-size: 1rem;
+  text-align: left;
+  word-break: break-all;
+  margin-top: 40px;
+}
+
+.button-area {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
