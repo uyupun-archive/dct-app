@@ -1,13 +1,12 @@
 import React from "react";
 import styles from "./styles.module.scss";
+import { Link, LinkProps } from "react-router-dom";
 
-type Props = React.ComponentPropsWithoutRef<"a">;
-
-const LinkButton: React.FC<Props> = ({ children, ...rest }) => {
+const LinkButton: React.FC<LinkProps> = ({ children, ...rest }) => {
   return (
-    <a {...rest} className={styles["link-button"]}>
+    <Link {...rest} className={styles["link-button"]}>
       {children}
-    </a>
+    </Link>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles.module.scss"
+import styles from "./styles.module.scss";
 import { Button } from "../../components/Button";
 import { LinkButton } from "../../components/LinkButton";
 
@@ -15,7 +15,7 @@ const Top: React.FC = () => {
         <Button type="button" onClick={() => {}}>
           ウォレットを接続
         </Button>
-        <LinkButton type="button" href="/think">
+        <LinkButton type="button" to="/think">
           考える！
         </LinkButton>
       </div>
