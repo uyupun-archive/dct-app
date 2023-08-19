@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useAtom } from "jotai";
+import { stepCountAtom } from "../atoms/stepCount";
 
 /// ref: https://qiita.com/juginon/items/0ffe16e027d6024a93f8
 const usePedometer = () => {
   // 歩数
-  const [stepCount, setStepCount] = useState(0);
+  const [stepCount, setStepCount] = useAtom(stepCountAtom);
 
   let filterData = { x: 0, y: 0, z: 0 };
   let axisResult = { x: 0, y: 0, z: 0 };
