@@ -1,9 +1,24 @@
 import React from "react";
+import styles from "./styles.module.scss"
+import { Button } from "../../components/Button";
+import { LinkButton } from "../../components/LinkButton";
 
 const Top: React.FC = () => {
   return (
-    <div>
-      <h1>Don’t cunning! Think.</h1>
+    <div className={styles.container}>
+      <div>
+        <h1>
+          Don’t cunning! <span className={styles["font-bold"]}>Think.</span>
+        </h1>
+      </div>
+      <div className={styles["button-area"]}>
+        <Button type="button" onClick={() => {}}>
+          ウォレットを接続
+        </Button>
+        <LinkButton type="button" href="/think">
+          考える！
+        </LinkButton>
+      </div>
     </div>
   );
 };
