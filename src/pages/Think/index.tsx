@@ -37,7 +37,7 @@ const Think: React.FC = () => {
         >
           カンニングする！
         </Button>
-        <LinkButton href="/answer">考えをまとめる！</LinkButton>
+        <LinkButton to="/answer">考えをまとめる！</LinkButton>
       </div>
     </div>
   );
