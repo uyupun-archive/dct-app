@@ -3,9 +3,19 @@ import styles from "./styles.module.scss";
 import { Button } from "../../components/Button";
 import { LinkButton } from "../../components/LinkButton";
 import { usePedometer } from "../../hooks/usePedometer";
+import { useQuestion } from "../../hooks/useQuestion";
 
 const Think: React.FC = () => {
   const { stepCount } = usePedometer();
+
+  const { isLoading, error, data } = useQuestion();
+  if (isLoading || data === undefined) {
+    return <></>;
+  }
+
+  if (error) {
+    return <div>エラーです。</div>;
+  }
 
   return (
     <div className={styles.container}>
@@ -16,10 +26,7 @@ const Think: React.FC = () => {
           {stepCount}
           <span>歩</span>
         </div>
-        <p className={styles.question}>
-          Q.
-          問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い問い
-        </p>
+        <p className={styles.question}>Q. {data.question}</p>
       </div>
       <div className={styles["button-area"]}>
         <Button
