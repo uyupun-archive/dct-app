@@ -1,16 +1,16 @@
 import React from "react";
 import styles from "./styles.module.scss"
-import { Button } from "../../components/Button";
+import { LinkButton } from "../../components/LinkButton";
 
 const Complete: React.FC = () => {
   return (
     <div className={styles.container}>
       <h1>お疲れ様でした</h1>
       <div className={styles["button-area"]}>
-        <Button type="button" onClick={() => {}}>
+        <LinkButton type="button" href="/">
           トップへ戻る！
-          </Button>
-        </div>
+        </LinkButton>
+      </div>
     </div>
   );
 };
