@@ -2,14 +2,19 @@ import React from "react";
 import styles from "./styles.module.scss";
 import { Button } from "../../components/Button";
 import { LinkButton } from "../../components/LinkButton";
+import { usePedometer } from "../../hooks/usePedometer";
 
 const Think: React.FC = () => {
+  const { stepCount } = usePedometer();
+
   return (
     <div className={styles.container}>
       <div>
         <h1 className={styles.heading}>考え中</h1>
         <div className={styles.steps}>
-          <span>歩数: </span>100<span>歩</span>
+          <span>歩数: </span>
+          {stepCount}
+          <span>歩</span>
         </div>
         <p className={styles.question}>
           Q.

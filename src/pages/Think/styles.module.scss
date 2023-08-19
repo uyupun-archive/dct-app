@@ -1,7 +1,7 @@
 @import "../../styles/variables.scss";
 
 .container {
-  min-height: 100vh;
+  min-height: 100svh;
   display: grid;
   grid-template-rows: 1fr auto;
   text-align: center;
