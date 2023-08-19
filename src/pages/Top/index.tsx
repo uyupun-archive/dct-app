@@ -15,7 +15,7 @@ const Top: React.FC = () => {
         <Button type="button" onClick={() => {}}>
           ウォレットを接続
         </Button>
-        <LinkButton type="button" onClick={() => {}}>
+        <LinkButton type="button" href="/think">
           考える！
         </LinkButton>
       </div>
