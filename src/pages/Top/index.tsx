@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./styles.module.scss"
-import { Button } from "../../components/Button";
+import { LinkButton } from "../../components/LinkButton";
 
 const Top: React.FC = () => {
   return (
@@ -11,12 +11,12 @@ const Top: React.FC = () => {
         </h1>
       </div>
       <div className={styles["button-area"]}>
-        <Button type="button" onClick={() => {}}>
+        <LinkButton type="button" onClick={() => {}}>
           ウォレットを接続
-        </Button>
-        <Button type="button" onClick={() => {}}>
+        </LinkButton>
+        <LinkButton type="button" onClick={() => {}}>
           考える！
-        </Button>
+        </LinkButton>
       </div>
     </div>
   );
