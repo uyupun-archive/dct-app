@@ -17,6 +17,7 @@ const useQuestion = () => {
           `${import.meta.env.VITE_API_URL}/question`
         )
         .then((res) => res.data),
+    refetchOnWindowFocus: false,
   });
 
   return query;
