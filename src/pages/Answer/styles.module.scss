@@ -14,19 +14,6 @@
   margin-bottom: 20px;
 }
 
-.steps {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  & span {
-    font-size: 1.5rem;
-  }
-}
-
-.text-area {
-  width: 100%;
-
-}
-
 .question {
   font-size: 1rem;
   text-align: left;
@@ -34,15 +21,32 @@
   margin-bottom: 20px;
 }
 
-.answer {
-  font-size: 1rem;
+.label-area {
   text-align: left;
-  word-break: break-all;
-  margin-top: 40px;
+  margin-bottom: 8px;
 }
 
-.button-area {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.label {
+  font-size: 1rem;
+}
+
+.text-area {
+  width: 100%;
+  height: 100px;
+  resize: vertical;
+  border: 1px solid $color-gray;
+  border-radius: 4px;
+  margin-bottom: 20px;
+
+  &-error {
+    border-color: $color-red;
+    margin-bottom: 0;
+  }
+}
+
+.error-message {
+  color: $color-red;
+  text-align: left;
+  font-size: 1rem;
+  margin-bottom: 20px;
 }

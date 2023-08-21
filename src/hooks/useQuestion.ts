@@ -17,9 +17,10 @@ const useQuestion = () => {
           `${import.meta.env.VITE_API_URL}/question`
         )
         .then((res) => res.data),
+    refetchOnWindowFocus: false,
   });
 
   return query;
 };
 
-export { useQuestion };
+export { useQuestion, type QuestionResponse };
