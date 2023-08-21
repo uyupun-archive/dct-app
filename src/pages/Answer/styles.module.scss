@@ -33,7 +33,20 @@
 .text-area {
   width: 100%;
   height: 100px;
+  resize: vertical;
   border: 1px solid $color-gray;
   border-radius: 4px;
+  margin-bottom: 20px;
+
+  &-error {
+    border-color: $color-red;
+    margin-bottom: 0;
+  }
+}
+
+.error-message {
+  color: $color-red;
+  text-align: left;
+  font-size: 1rem;
   margin-bottom: 20px;
 }

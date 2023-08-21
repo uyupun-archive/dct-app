@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useCallback, FormEventHandler } from "react";
+import { useCallback, FormEvent, Dispatch, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
-import { useQuestion } from "./useQuestion";
 import { stepCountAtom } from "../atoms/stepCount";
+import { useQueryQuestion } from "./useQueryQuestion";
 
 type AnswerRequest = {
   question_id: number;
@@ -13,21 +13,33 @@ type AnswerRequest = {
 };
 
 const useAnswer = () => {
-  const { data: question } = useQuestion();
+  const { data: question } = useQueryQuestion();
   const [stepCount, setStepCount] = useAtom(stepCountAtom);
   const navigate = useNavigate();
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = useCallback(
-    async (e) => {
+  const handleSubmit = useCallback(
+    async (
+      e: FormEvent<HTMLFormElement>,
+      setIsError: Dispatch<SetStateAction<boolean>>
+    ) => {
       e.preventDefault();
       const target = e.target as HTMLFormElement;
-      if (question === undefined || typeof target.answer !== "string") return;
+      const answer = target?.answer?.value;
+      if (
+        question === null ||
+        typeof answer !== "string" ||
+        answer.length === 0
+      ) {
+        setIsError(true);
+        return;
+      }
 
       const requestData: AnswerRequest = {
         question_id: question.id,
         step_count: stepCount,
-        wallet_address: "",
-        answer: target.answer,
+        // TODO: 仮でデータを挿入している
+        wallet_address: "wallet_address",
+        answer: answer,
       };
       try {
         await axios.post(
