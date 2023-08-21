@@ -4,11 +4,13 @@ import { Button } from "../../components/Button";
 import { LinkButton } from "../../components/LinkButton";
 import { usePedometer } from "../../hooks/usePedometer";
 import { useQuestion } from "../../hooks/useQuestion";
+import { useCunning } from "../../hooks/useCunning";
 
 const Think: React.FC = () => {
   const { stepCount } = usePedometer();
-
+  const { handleClick } = useCunning();
   const { isLoading, error, data } = useQuestion();
+
   if (isLoading || data === undefined) {
     return <></>;
   }
@@ -31,8 +33,17 @@ const Think: React.FC = () => {
       <div className={styles["button-area"]}>
         <Button
           type="button"
-          onClick={() => {
-            // モーダル開く
+          onClick={async () => {
+            // TODO: モーダルを開き、その中でhandleClickを実行する
+            try {
+              const cunning = await handleClick();
+              if (cunning === undefined) {
+                throw new Error();
+              }
+              alert(`A. ${cunning.answer}`);
+            } catch (_) {
+              alert("カンニングできませんでした。");
+            }
           }}
         >
           カンニングする！
