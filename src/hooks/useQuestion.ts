@@ -23,4 +23,4 @@ const useQuestion = () => {
   return query;
 };
 
-export { useQuestion };
+export { useQuestion, type QuestionResponse };
