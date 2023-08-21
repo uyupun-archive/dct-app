@@ -6,7 +6,7 @@ const Complete: React.FC = () => {
   return (
     <div className={styles.container}>
       <h1>お疲れ様でした</h1>
-      <div className={styles["button-area"]}>
+      <div>
         <LinkButton to="/">トップへ戻る！</LinkButton>
       </div>
     </div>
