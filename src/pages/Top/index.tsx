@@ -7,8 +7,8 @@ const Top: React.FC = () => {
   return (
     <div className={styles.container}>
       <div>
-        <h1>
-          Don’t cunning! <span className={styles["font-bold"]}>Think.</span>
+        <h1 className={styles.heading}>
+          Don’t cunning! <span className={styles["font-bold"]}>Think</span>.
         </h1>
       </div>
       <div className={styles["button-area"]}>
