@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import { Button } from "../../components/Button";
 import { LinkButton } from "../../components/LinkButton";
 import { ethers } from "ethers";
 import ierc20 from "../../assets/IERC20.json";
+import { useAtom } from "jotai";
+import { walletAtom } from "../../atoms/wallet";
 
 const providerUrl = import.meta.env.VITE_ALCHEMY_API_URL;
 const privateKey = import.meta.env.VITE_PRIVATE_KEY;
@@ -54,6 +56,9 @@ async function sendToken(
 }
 
 const Top: React.FC = () => {
+  const [, setWallet] = useAtom(walletAtom);
+  const [address, setAddress] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <div className={styles.container}>
       <div>
@@ -84,8 +89,33 @@ const Top: React.FC = () => {
         >
           送金
         </Button>
-        <Button type="button" onClick={() => {}}>
-          ウォレットを接続
+        <div className={styles.form}>
+          <label htmlFor="address">ウォレットアドレス</label>
+          <input
+            id="address"
+            type="text"
+            className={styles["text-box"]}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        </div>
+        <div className={styles.form}>
+          <label htmlFor="password">秘密鍵</label>
+          <input
+            id="password"
+            type="password"
+            className={styles["text-box"]}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        <Button
+          type="button"
+          onClick={() => {
+            setWallet({ address, password });
+            alert("保存しました！");
+          }}
+        >
+          ウォレットの保存
         </Button>
         <LinkButton type="button" to="/think">
           考える！
