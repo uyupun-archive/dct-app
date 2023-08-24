@@ -6,7 +6,7 @@ import { useAtom } from "jotai";
 import { walletAtom } from "../../atoms/wallet";
 
 const Top: React.FC = () => {
-  const [, setWallet] = useAtom(walletAtom);
+  const [wallet, setWallet] = useAtom(walletAtom);
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
   return (
@@ -23,6 +23,7 @@ const Top: React.FC = () => {
             id="address"
             type="text"
             className={styles["text-box"]}
+            defaultValue={wallet.address}
             onChange={(e) => setAddress(e.target.value)}
           />
         </div>
@@ -32,6 +33,7 @@ const Top: React.FC = () => {
             id="password"
             type="password"
             className={styles["text-box"]}
+            defaultValue={wallet.password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
