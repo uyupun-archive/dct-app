@@ -9,7 +9,7 @@ import { useAnswer } from "../../hooks/useAnswer";
 const Answer: React.FC = () => {
   const navigate = useNavigate();
   const { data } = useQueryQuestion();
-  const { handleSubmit } = useAnswer();
+  const { handleSubmit, isLoading } = useAnswer();
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
@@ -49,7 +49,9 @@ const Answer: React.FC = () => {
         )}
       </div>
       <div>
-        <Button type="submit">答える！</Button>
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? "回答送信中👀" : "答える！"}
+        </Button>
       </div>
     </form>
   );

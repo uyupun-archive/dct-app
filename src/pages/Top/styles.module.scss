@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .container {
   min-height: 100svh;
   display: grid;
@@ -17,8 +19,29 @@
   font-weight: bold;
 }
 
+.image {
+  width: 100%;
+  max-width: 500px;
+  object-fit: contain;
+  padding: 0 75px;
+  margin: auto;
+}
+
 .button-area {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.text-box {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid $color-gray;
+  border-radius: 4px;
 }

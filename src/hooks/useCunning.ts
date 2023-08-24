@@ -1,7 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { useCallback } from "react";
-import { useQueryQuestion } from "./useQueryQuestion";
+import { useCallback, useState } from "react";
 import { QuestionResponse } from "./useQuestion";
+import { useWallet } from "./useWallet";
+import { useAtom } from "jotai";
+import { walletAtom } from "../atoms/wallet";
 
 type CunningRequest = {
   question_id: number;
@@ -17,16 +19,22 @@ type CunningResponse = {
 };
 
 const useCunning = () => {
-  const { data: question } = useQueryQuestion();
+  const { sendToken } = useWallet();
+  const [isLoading, setIsLoading] = useState(false);
+  const [wallet] = useAtom(walletAtom);
+
+  const providerUrl = import.meta.env.VITE_ALCHEMY_API_URL;
+  const privateKey = wallet.password;
+  const tokenContractAddress = import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS;
+  const recipientAddress = import.meta.env.VITE_RECIPIENT_ADDRESS;
+  const amount = "1000";
 
   const handleClick = useCallback(
-    async () => {
-      if (question === null) {
-        throw new Error();
-      }
+    async (questionId: number) => {
+      setIsLoading(true);
 
       const requestData: CunningRequest = {
-        question_id: question.id,
+        question_id: questionId,
       };
       try {
         const res = await axios.post<
@@ -37,16 +45,27 @@ const useCunning = () => {
             "Content-Type": "application/json",
           },
         });
+        if (res.data) {
+          await sendToken(
+            providerUrl,
+            privateKey,
+            tokenContractAddress,
+            recipientAddress,
+            amount
+          );
+        }
         return res.data;
-      } catch (e) {
-        console.error(e);
+      } catch (_) {
+        throw new Error();
+      } finally {
+        setIsLoading(false);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
-  return { handleClick };
+  return { handleClick, isLoading };
 };
 
 export { useCunning };

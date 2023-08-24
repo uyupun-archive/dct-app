@@ -8,10 +8,10 @@ import { useCunning } from "../../hooks/useCunning";
 
 const Think: React.FC = () => {
   const { stepCount } = usePedometer();
-  const { handleClick } = useCunning();
-  const { isLoading, error, data } = useQuestion();
+  const { isLoading: questionIsLoading, error, data: question } = useQuestion();
+  const { handleClick, isLoading: cunningIsLoading } = useCunning();
 
-  if (isLoading || data === undefined) {
+  if (questionIsLoading || question === undefined) {
     return <></>;
   }
 
@@ -28,25 +28,28 @@ const Think: React.FC = () => {
           {stepCount}
           <span>歩</span>
         </div>
-        <p className={styles.question}>Q. {data.question}</p>
+        <p className={styles.question}>Q. {question.question}</p>
       </div>
       <div className={styles["button-area"]}>
         <Button
           type="button"
           onClick={async () => {
             // TODO: モーダルを開き、その中でhandleClickを実行する
-            try {
-              const cunning = await handleClick();
-              if (cunning === undefined) {
-                throw new Error();
+            if (confirm("1,000CNGを使用して、カンニングしますか？")) {
+              try {
+                const cunning = await handleClick(question.id);
+                if (cunning === undefined) {
+                  throw new Error();
+                }
+                alert(`A. ${cunning.answer}`);
+              } catch (_) {
+                alert("カンニングに失敗しました🤓");
               }
-              alert(`A. ${cunning.answer}`);
-            } catch (_) {
-              alert("カンニングできませんでした。");
             }
           }}
+          disabled={cunningIsLoading}
         >
-          カンニングする！
+          {cunningIsLoading ? "カンニング中です👀" : "カンニングする！"}
         </Button>
         <LinkButton to="/answer">考えをまとめる！</LinkButton>
       </div>

@@ -1,9 +1,16 @@
 import axios from "axios";
-import { useCallback, FormEvent, Dispatch, SetStateAction } from "react";
+import {
+  useCallback,
+  FormEvent,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { stepCountAtom } from "../atoms/stepCount";
 import { useQueryQuestion } from "./useQueryQuestion";
+import { walletAtom } from "../atoms/wallet";
 
 type AnswerRequest = {
   question_id: number;
@@ -14,7 +21,9 @@ type AnswerRequest = {
 
 const useAnswer = () => {
   const { data: question } = useQueryQuestion();
-  const [stepCount, setStepCount] = useAtom(stepCountAtom);
+  const [stepCount] = useAtom(stepCountAtom);
+  const [wallet] = useAtom(walletAtom);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = useCallback(
@@ -23,6 +32,7 @@ const useAnswer = () => {
       setIsError: Dispatch<SetStateAction<boolean>>
     ) => {
       e.preventDefault();
+      setIsLoading(true);
       const target = e.target as HTMLFormElement;
       const answer = target?.answer?.value;
       if (
@@ -37,8 +47,7 @@ const useAnswer = () => {
       const requestData: AnswerRequest = {
         question_id: question.id,
         step_count: stepCount,
-        // TODO: 仮でデータを挿入している
-        wallet_address: "wallet_address",
+        wallet_address: wallet.address,
         answer: answer,
       };
       try {
@@ -52,17 +61,18 @@ const useAnswer = () => {
             },
           }
         );
-        setStepCount(0);
         navigate("/complete");
       } catch (e) {
-        console.error(e);
+        alert("回答に失敗しました🤓");
+      } finally {
+        setIsLoading(false);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
-  return { handleSubmit };
+  return { handleSubmit, isLoading };
 };
 
 export { useAnswer };
