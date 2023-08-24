@@ -44,7 +44,28 @@ const useWallet = () => {
     return receipt;
   }
 
-  return { sendToken };
+  async function getTokenBalance(
+    providerUrl: string,
+    tokenAddress: string,
+    userAddress: string
+  ): Promise<ethers.BigNumberish> {
+    // プロバイダの初期化
+    const provider = new ethers.JsonRpcProvider(providerUrl);
+
+    // コントラクトのインスタンスを作成
+    const tokenContract = new ethers.Contract(
+      tokenAddress,
+      ierc20.abi,
+      provider
+    );
+
+    // balanceOfメソッドを使用してトークンの残高を取得
+    const balance = await tokenContract.balanceOf(userAddress);
+
+    return balance;
+  }
+
+  return { sendToken, getTokenBalance };
 };
 
 export { useWallet };

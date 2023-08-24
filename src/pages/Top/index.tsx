@@ -6,15 +6,41 @@ import { useAtom } from "jotai";
 import { walletAtom } from "../../atoms/wallet";
 import imgUrl from "../../assets/kangaeruhito.png";
 import { stepCountAtom } from "../../atoms/stepCount";
+import { useWallet } from "../../hooks/useWallet";
 
 const Top: React.FC = () => {
   const [wallet, setWallet] = useAtom(walletAtom);
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
+  const [balance, setBalance] = useState<string>("");
   const [, setStepCount] = useAtom(stepCountAtom);
+  const { getTokenBalance } = useWallet();
+
+  const getBalance = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const address = JSON.parse(
+      localStorage.getItem("wallet") as string
+    ).address;
+    console.log("address: " + address);
+    if (typeof address === "string") {
+      const providerUrl = import.meta.env.VITE_ALCHEMY_API_URL;
+      const tokenContractAddress = import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS;
+      try {
+        const tokenBalance = await getTokenBalance(
+          providerUrl,
+          tokenContractAddress,
+          address
+        );
+        setBalance(String(tokenBalance));
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
 
   useEffect(() => {
     setStepCount(0);
+    getBalance();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -27,6 +53,13 @@ const Top: React.FC = () => {
         <img src={imgUrl} alt="考える人のイラスト" className={styles.image} />
       </div>
       <div className={styles["button-area"]}>
+        <p>
+          残高:{" "}
+          {`${Number(
+            balance.substring(0, balance.length - 18)
+          ).toLocaleString()}`}
+          CNG
+        </p>
         <div className={styles.form}>
           <label htmlFor="address">ウォレットアドレス</label>
           <input
@@ -50,8 +83,9 @@ const Top: React.FC = () => {
 
         <Button
           type="button"
-          onClick={() => {
+          onClick={async () => {
             setWallet({ address, password });
+            await getBalance();
             alert("保存しました！");
           }}
         >
