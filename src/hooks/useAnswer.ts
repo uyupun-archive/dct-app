@@ -21,7 +21,7 @@ type AnswerRequest = {
 
 const useAnswer = () => {
   const { data: question } = useQueryQuestion();
-  const [stepCount, setStepCount] = useAtom(stepCountAtom);
+  const [stepCount] = useAtom(stepCountAtom);
   const [wallet] = useAtom(walletAtom);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -61,7 +61,6 @@ const useAnswer = () => {
             },
           }
         );
-        setStepCount(0);
         navigate("/complete");
       } catch (e) {
         alert("回答に失敗しました🤓");

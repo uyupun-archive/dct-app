@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { Button } from "../../components/Button";
 import { LinkButton } from "../../components/LinkButton";
 import { useAtom } from "jotai";
 import { walletAtom } from "../../atoms/wallet";
-import imgUrl from '../../assets/kangaeruhito.png'
+import imgUrl from "../../assets/kangaeruhito.png";
+import { stepCountAtom } from "../../atoms/stepCount";
 
 const Top: React.FC = () => {
   const [wallet, setWallet] = useAtom(walletAtom);
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
+  const [, setStepCount] = useAtom(stepCountAtom);
+
+  useEffect(() => {
+    setStepCount(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className={styles.container}>
       <div>
