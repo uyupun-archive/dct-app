@@ -4,6 +4,7 @@ import { Button } from "../../components/Button";
 import { LinkButton } from "../../components/LinkButton";
 import { useAtom } from "jotai";
 import { walletAtom } from "../../atoms/wallet";
+import imgUrl from '../../assets/kangaeruhito.png'
 
 const Top: React.FC = () => {
   const [wallet, setWallet] = useAtom(walletAtom);
@@ -15,6 +16,7 @@ const Top: React.FC = () => {
         <h1 className={styles.heading}>
           Don’t cunning! <span className={styles["font-bold"]}>Think</span>.
         </h1>
+        <img src={imgUrl} alt="考える人のイラスト" className={styles.image} />
       </div>
       <div className={styles["button-area"]}>
         <div className={styles.form}>
