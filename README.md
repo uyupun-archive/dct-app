@@ -1,5 +1,7 @@
 # Don't cunning! Think.
 
+<img alt="ロゴ" src="/src/assets/logo.png">
+
 ## セットアップ
 
 node v18.17.1 を使用します  
