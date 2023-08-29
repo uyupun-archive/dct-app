@@ -1,6 +1,6 @@
 # Don't cunning! Think.
 
-<img alt="ロゴ" src="/src/assets/logo.png">
+<img width="200" alt="ロゴ" src="/src/assets/logo.png">
 
 ## セットアップ
 
